@@ -7,7 +7,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -15,7 +17,7 @@ import com.example.simBo.board.Board;
 import com.example.simBo.board.BoardRepository;
 import com.example.simBo.comment.CommentRepository;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@TestMethodOrder(MethodOrderer.MethodName.class)
 @SpringBootTest
 class RepositoryTests {
 
@@ -26,7 +28,7 @@ class RepositoryTests {
 	private CommentRepository commentRepository;
 	
 	@Test
-	void testCreate() {
+	void test1_create() {
 		
 		Board b1 = new Board();
 		b1.setTitle("유닛테스트 시작합니다");
@@ -37,7 +39,7 @@ class RepositoryTests {
 	}
 	
 	@Test
-	void testRead() {
+	void test2_read() {
 		List<Board> all = this.boardRepository.findAll();
 		assertEquals(1, all.size());
 		
@@ -45,18 +47,20 @@ class RepositoryTests {
 		assertEquals("유닛테스트 시작합니다", b.getTitle());
 	}
 	
+	//테스트 할 때 findById 1씩 증가시켜줄 것
 	@Test
-	void testUpdate() {
-		Optional<Board> oq = this.boardRepository.findById(3);
+	void test3_update() {
+		Optional<Board> oq = this.boardRepository.findById(4);
 		assertTrue(oq.isPresent());
 		Board b = oq.get();
 		b.setTitle("제목 수정합니다");
 		this.boardRepository.save(b);
 	}
 
+	//테스트 할 때 findById 1씩 증가시켜줄 것
 	@Test
-	void testDelete() {
-		Optional<Board> oq = this.boardRepository.findById(3);
+	void test4_delete() {
+		Optional<Board> oq = this.boardRepository.findById(4);
 		assertTrue(oq.isPresent());
 		Board b = oq.get();
 		this.boardRepository.delete(b);

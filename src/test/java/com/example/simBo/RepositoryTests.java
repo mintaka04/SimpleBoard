@@ -35,6 +35,9 @@ class RepositoryTests {
 		b1.setContent("테스트 글 내용입니다.");
 		b1.setWrittenDate(LocalDateTime.now());
 		this.boardRepository.save(b1);
+		//this : 이 test1_create라는 메소드를 호출한 객체의 멤버인 boardRepository의
+		//save 메소드를 사용하겠다.
+		//실행 결과에 차이는 없다고 함. 다만 써주는게 더 명확하다고.
 		
 	}
 	

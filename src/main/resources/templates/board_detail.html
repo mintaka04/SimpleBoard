@@ -43,8 +43,12 @@
 	
 	<!-- 코멘트 작성 부분 -->
 	<form th:action="@{|/comment/create/${board.boardNum}|}" 
+			th:object="${commentForm}"
 			method="post" class="my-3">
-		<textarea name="content" id="content" rows="10" class="form-control"></textarea>
+		<div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+			<div th:each="err : ${#fields.allErrors()}" th:text="${err}"/>
+		</div>
+		<textarea name="content" th:field="*{content}" rows="10" class="form-control"></textarea>
 		<input type="submit" value="코멘트 등록" class="btn btn-primary my-2" />
 	</form>	
 	
